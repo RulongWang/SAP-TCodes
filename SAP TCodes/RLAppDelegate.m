@@ -7,7 +7,7 @@
 //
 
 #import "RLAppDelegate.h"
-
+#import "TCentralController.h"
 @implementation RLAppDelegate
 
 @synthesize managedObjectContext = _managedObjectContext;
@@ -16,8 +16,16 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    // copy the database from the bundle if necessary
+    if (! [self initDB]) {
+            // TODO: alert the user!
+            NSLog (@"couldn't init db");
+    }
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    tcentralMain = [[TCentralController alloc] init];
+    nav = [[UINavigationController alloc]initWithRootViewController:tcentralMain];
+    self.window.rootViewController = nav;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
@@ -146,4 +154,38 @@
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
 
+
+#pragma mark - init db
+- (BOOL) initDB {
+    NSLog (@"initializeDB");
+    // look to see if DB is in known location (~/Documents/$DATABASE_FILE_NAME)
+    
+    NSArray *searchPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    
+    NSString *documentFolderPath = [searchPaths objectAtIndex: 0];
+    //查看文件目录
+    NSLog(@"%@",documentFolderPath);
+    NSString *dbFilePath = [documentFolderPath stringByAppendingPathComponent:@"Tcode.db"];
+    //END:code.DatabaseShoppingList.findDocumentsDirectory
+    //START:code.DatabaseShoppingList.copyDatabaseFileToDocuments
+    if (! [[NSFileManager defaultManager] fileExistsAtPath: dbFilePath]) {
+        // didn't find db, need to copy
+        NSString *backupDbPath = [[NSBundle mainBundle] pathForResource:@"Tcode" ofType:@"db"];
+        if (backupDbPath == nil) {
+            // couldn't find backup db to copy
+            return NO;
+        } else {
+            BOOL copiedBackupDb = [[NSFileManager defaultManager] copyItemAtPath:backupDbPath toPath:dbFilePath error:nil];
+            NSLog(@"copy DB successfully");
+            if (! copiedBackupDb) {
+                // copying backup db failed
+                return NO;  
+            }  
+        }  
+    }
+    NSLog (@"bottom of initDB, return YES");  
+    return YES;  
+    //END:code.DatabaseShoppingList.copyDatabaseFileToDocuments  
+   
+}
 @end
