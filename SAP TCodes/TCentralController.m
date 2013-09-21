@@ -35,12 +35,14 @@
     
     if ([[UIScreen mainScreen] bounds].size.height == 568)
     {
-        self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"idxbg-568h@2x.png"]];
+//        self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"idxbg-568h@2x.png"]];
+        self.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.3];
 
     }
     else
     {
-        self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"idxbg.png"]];
+//        self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"idxbg.png"]];
+        self.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.3];
 
     }
     
@@ -59,7 +61,7 @@
   //  BrowseTableViewController *btcontroller = [[BrowseTableViewController alloc]init];
     CategoryViewController *catController = [[CategoryViewController alloc]init];
     
-    [self.navigationController pushViewController:catController animated:YES];
+    [self.navigationController pushViewController:catController animated:NO];
 
     NSLog(@"BrowClick");
 }
@@ -68,7 +70,7 @@
     NSLog(@"SearchClick");
     AdvanceViewController *searchController = [[AdvanceViewController alloc]init];
     searchController.ntitle = @"Advance Search";
-    [self.navigationController pushViewController:searchController animated:YES];
+    [self.navigationController pushViewController:searchController animated:NO];
 
 }
 
@@ -78,14 +80,14 @@
     NSMutableArray *tcodelist = [SQLiteTools queryTcodesByFav];
     searchController.tcodelist = tcodelist;
     searchController.ntitle = @"Favourite Transactions";
-    [self.navigationController pushViewController:searchController animated:YES];
+    [self.navigationController pushViewController:searchController animated:NO];
 
 }
 
 - (IBAction)onActionAdd:(id)sender {
     NSLog(@"addClick");
     AddNewViewController  *addNewController = [[AddNewViewController alloc]initWithNibName:@"AddNewViewController" bundle:nil];
-    [self.navigationController pushViewController:addNewController animated:YES];
+    [self.navigationController pushViewController:addNewController animated:NO];
 
 }
 
@@ -95,8 +97,8 @@
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [self.navigationController setNavigationBarHidden:NO animated:animated];
-    [super viewWillDisappear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
+    [super viewWillDisappear:NO];
 }
 
 @end

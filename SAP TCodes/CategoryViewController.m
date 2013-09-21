@@ -34,12 +34,16 @@
     // Do any additional setup after loading the view from its nib.
     if ([[UIScreen mainScreen] bounds].size.height == 568)
     {
-        self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"idxbg-568h@2x.png"]];
+//        self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"idxbg-568h@2x.png"]];
+        self.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.3];
+
         
     }
     else
     {
-        self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"idxbg.png"]];
+//        self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"idxbg.png"]];
+        self.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.3];
+
         
     }
 

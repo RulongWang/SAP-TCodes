@@ -13,6 +13,10 @@
 @property (strong, nonatomic) IBOutlet UIButton *searchButton;
 @property (strong, nonatomic) IBOutlet UIButton *favButton;
 @property (strong, nonatomic) IBOutlet UIButton *addButton;
+@property (strong, nonatomic) IBOutlet UILabel *CateLabel;
+@property (strong, nonatomic) IBOutlet UILabel *SearchLabel;
+@property (strong, nonatomic) IBOutlet UILabel *FavLabel;
+@property (strong, nonatomic) IBOutlet UILabel *AddnewLabel;
 - (IBAction)onActionBrow:(id)sender;
 - (IBAction)onActionSearch:(id)sender;
 - (IBAction)onActionFav:(id)sender;
